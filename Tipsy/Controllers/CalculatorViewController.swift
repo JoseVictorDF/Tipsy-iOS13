@@ -18,8 +18,11 @@ class CalculatorViewController: UIViewController {
 
     var tip = 0.10
     var numberOfPeople = 2
+    var billTotal = 0.0
     
     @IBAction func tipChanged(_ sender: UIButton) {
+        billTextField.endEditing(true)
+        
         zeroPctButton.isSelected = false
         tenPctButton.isSelected = false
         twentyPctButton.isSelected = false
@@ -38,7 +41,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print(numberOfPeople)
+        let bill = billTextField.text!
+        
+        if bill != "" {
+            billTotal = Double(bill)!
+            let result = billTotal * (1 + tip) / Double(numberOfPeople)
+            let resultTo2DecimalPlaces = String(format: "%.2f", result)
+        }
     }
 }
 
